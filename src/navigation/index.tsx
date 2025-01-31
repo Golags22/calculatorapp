@@ -1,105 +1,29 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { HeaderButton, Text } from '@react-navigation/elements';
-import {
-  createStaticNavigation,
-  StaticParamList,
-} from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Image } from 'react-native';
-import bell from '../assets/bell.png';
-import newspaper from '../assets/newspaper.png';
-import { Home } from './screens/Home';
-import { Profile } from './screens/Profile';
-import { Settings } from './screens/Settings';
-import { Updates } from './screens/Updates';
-import { NotFound } from './screens/NotFound';
+import { Asset } from 'expo-asset';
+import * as SplashScreen from 'expo-splash-screen';
+import React from 'react';
+import { registerRootComponent } from 'expo';
+import App from '../App';  // Import your App.tsx
 
-const HomeTabs = createBottomTabNavigator({
-  screens: {
-    Home: {
-      screen: Home,
-      options: {
-        title: 'Feed',
-        tabBarIcon: ({ color, size }) => (
-          <Image
-            source={newspaper}
-            tintColor={color}
-            style={{
-              width: size,
-              height: size,
-            }}
-          />
-        ),
-      },
-    },
-    Updates: {
-      screen: Updates,
-      options: {
-        tabBarIcon: ({ color, size }) => (
-          <Image
-            source={bell}
-            tintColor={color}
-            style={{
-              width: size,
-              height: size,
-            }}
-          />
-        ),
-      },
-    },
-  },
-});
+// Load assets (images, icons, etc.)
+Asset.loadAsync([
+  require('./assets/icons/home.png'),
+  require('./assets/icons/calculate.png'),
+  require('./assets/icons/result.png'),
+]);
 
-const RootStack = createNativeStackNavigator({
-  screens: {
-    HomeTabs: {
-      screen: HomeTabs,
-      options: {
-        title: 'Home',
-        headerShown: false,
-      },
-    },
-    Profile: {
-      screen: Profile,
-      linking: {
-        path: ':user(@[a-zA-Z0-9-_]+)',
-        parse: {
-          user: (value) => value.replace(/^@/, ''),
-        },
-        stringify: {
-          user: (value) => `@${value}`,
-        },
-      },
-    },
-    Settings: {
-      screen: Settings,
-      options: ({ navigation }) => ({
-        presentation: 'modal',
-        headerRight: () => (
-          <HeaderButton onPress={navigation.goBack}>
-            <Text>Close</Text>
-          </HeaderButton>
-        ),
-      }),
-    },
-    NotFound: {
-      screen: NotFound,
-      options: {
-        title: '404',
-      },
-      linking: {
-        path: '*',
-      },
-    },
-  },
-});
+// Prevent the splash screen from hiding until assets are loaded
+SplashScreen.preventAutoHideAsync();
 
-export const Navigation = createStaticNavigation(RootStack);
-
-type RootStackParamList = StaticParamList<typeof RootStack>;
-
-declare global {
-  namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
-  }
+export default function Main() {
+  return (
+    <App
+      onReady={() => {
+        // Hide splash screen once everything is ready
+        SplashScreen.hideAsync();
+      }}
+    />
+  );
 }
+
+// Register the app's root component
+registerRootComponent(Main);

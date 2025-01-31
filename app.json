@@ -4,7 +4,7 @@
     "slug": "calculatorapp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/appicon.jpg",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "scheme": "calculatorapp",
@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.golags.calculatorapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -30,6 +31,11 @@
         }
       ],
       "react-native-edge-to-edge"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "a390eeee-18fb-4ba3-8afa-8585ba8ff218"
+      }
+    }
   }
 }
