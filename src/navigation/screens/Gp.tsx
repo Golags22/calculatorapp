@@ -128,18 +128,18 @@ export function Gp() {
   };
 
   const saveResult = () => {
-    // Firebase save functionality (commented out for now)
-    // db.collection('gpaResults').add({
-    //   courses: courses,
-    //   result: result,
-    //   timestamp: new Date(),
-    // })
-    // .then(() => {
-    //   Alert.alert('Saved', 'Your GPA result has been saved successfully.');
-    // })
-    // .catch((error) => {
-    //   Alert.alert('Error', 'Failed to save your result.');
-    // });
+    Firebase save functionality (commented out for now)
+    db.collection('gpaResults').add({
+      courses: courses,
+      result: result,
+      timestamp: new Date(),
+    })
+    .then(() => {
+      Alert.alert('Saved', 'Your GPA result has been saved successfully.');
+    })
+    .catch((error) => {
+      Alert.alert('Error', 'Failed to save your result.');
+    });
   };
 
   return (

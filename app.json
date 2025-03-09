@@ -1,40 +1,19 @@
 {
   "expo": {
-    "name": "calculatorapp",
-    "slug": "calculatorapp",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/appicon.jpg",
-    "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
-    "scheme": "calculatorapp",
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "package": "com.golags.calculatorapp"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "plugins": [
-      "expo-asset",
-      [
-        "expo-splash-screen",
-        {
-          "backgroundColor": "#ffffff",
-          "image": "./assets/splash-icon.png"
-        }
-      ],
-      "react-native-edge-to-edge"
-    ],
     "extra": {
       "eas": {
         "projectId": "a390eeee-18fb-4ba3-8afa-8585ba8ff218"
+      }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/a390eeee-18fb-4ba3-8afa-8585ba8ff218"
+    },
+    "android": {
+      "runtimeVersion": "1.0.0"
+    },
+    "ios": {
+      "runtimeVersion": {
+        "policy": "appVersion"
       }
     }
   }

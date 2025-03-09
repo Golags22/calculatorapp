@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, FlatList, Text, Alert, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
-// import { db } from './firebase'; // Uncomment and configure Firebase
+import { db } from '../../firebase'; // Uncomment and configure Firebase
 import { useNavigation } from '@react-navigation/native';
 
 export function Cgpa() {
@@ -25,7 +25,7 @@ export function Cgpa() {
     'F': { min: 0, max: 39, point: 0.00 },
   };
 
-  const getGradePoint = (score) => {
+  const getGradePoint = (score: number) => {
     for (const [grade, { min, max, point }] of Object.entries(gradeMapping)) {
       if (score >= min && score <= max) {
         return { grade, point: point.toFixed(2) };
@@ -129,18 +129,18 @@ export function Cgpa() {
   };
 
   const saveResult = () => {
-    // Firebase save functionality (commented out for now)
-    // db.collection('cgpaResults').add({
-    //   semesters: semesters,
-    //   result: result,
-    //   timestamp: new Date(),
-    // })
-    // .then(() => {
-    //   Alert.alert('Saved', 'Your CGPA result has been saved successfully.');
-    // })
-    // .catch((error) => {
-    //   Alert.alert('Error', 'Failed to save your result.');
-    // });
+    db.collection('cgpaResults').add({
+      semesters: semesters, // Ensure `semesters` is defined
+      result: result,       // Ensure `result` is defined
+      timestamp: new Date(), // Adds a timestamp
+    })
+    .then(() => {
+      Alert.alert('Saved', 'Your CGPA result has been saved successfully.');
+    })
+    .catch((error) => {
+      console.error('Error saving document: ', error); // Log the error for debugging
+      Alert.alert('Error', `Failed to save your result: ${error.message}`);
+    });
   };
 
   const removeCourse = (semesterIndex, courseIndex) => {
